@@ -14,3 +14,27 @@ jobs:
 
       - name: Mostrar Mensagem
         run: echo "Olá, este é o meu primeiro workflow de DevOps!"
+
+  dev:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Fase de Desenvolvimento
+        run: echo "Deploy no ambiente de desenvolvimento!"
+
+  qa:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Fase de QA
+        run: echo "Executar os testes de qualidade"
+
+  homologacao:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Ambiente de Homologação
+        run: echo "Deploy no ambiente de homologação!"
