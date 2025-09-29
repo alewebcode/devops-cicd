@@ -12,9 +12,6 @@ jobs:
       - name: Checkout de código
         uses: actions/checkout@v5
 
-      - name: Mostrar Mensagem
-        run: echo "Olá, este é o meu primeiro workflow de DevOps!"
-
   dev:
     runs-on: ubuntu-latest
     needs: build
@@ -33,8 +30,18 @@ jobs:
 
   homologacao:
     runs-on: ubuntu-latest
-    needs: build
+    needs:
+      - dev
+      - qa
 
     steps:
       - name: Ambiente de Homologação
         run: echo "Deploy no ambiente de homologação!"
+
+  producao:
+    runs-on: ubuntu-latest
+    needs: homologacao
+
+    steps:
+      - name: Deploy Prod
+        run: echo "Deploy no ambiente de produção!"
